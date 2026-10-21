@@ -60,17 +60,15 @@ function initCountdown() {
   const minsEl = document.getElementById('minutes');
   const secsEl = document.getElementById('seconds');
 
-  // Target deadline: 14 days from now or fixed target
-  let targetDate = localStorage.getItem('etechnovation_deadline');
-  if (!targetDate) {
-    const d = new Date();
-    d.setDate(d.getDate() + 14);
-    d.setHours(23, 59, 59);
-    targetDate = d.getTime();
-    localStorage.setItem('etechnovation_deadline', targetDate);
-  } else {
-    targetDate = parseInt(targetDate, 10);
+  // Target deadline: 10th November 23:59:59
+  const currentYear = new Date().getFullYear();
+  let deadline = new Date(currentYear, 10, 10, 23, 59, 59); // Month is 0-indexed: 10 = November
+  // If November 10th of current year has already passed, target next year
+  if (deadline.getTime() < Date.now()) {
+    deadline = new Date(currentYear + 1, 10, 10, 23, 59, 59);
   }
+  const targetDate = deadline.getTime();
+  localStorage.setItem('etechnovation_deadline', targetDate);
 
   function update() {
     const now = new Date().getTime();
