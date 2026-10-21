@@ -1,0 +1,13 @@
+# Operating System files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Duplicate raw uploads (clean versions are in assets/)
+IMG_9512.PNG
+WhatsApp Video*.mp4
+
+# Editor and temporary files
+.vscode/
+.idea/
+*.log
