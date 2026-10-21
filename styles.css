@@ -838,6 +838,26 @@ button, input, select, textarea {
   margin: 0 auto;
 }
 
+.form-deadline-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  background: rgba(0, 240, 255, 0.08);
+  border: 1px solid rgba(0, 240, 255, 0.35);
+  color: var(--brand-teal);
+  padding: 0.5rem 1.3rem;
+  border-radius: var(--radius-full);
+  font-size: 0.88rem;
+  font-weight: 600;
+  margin-top: 1.2rem;
+  backdrop-filter: var(--glass-blur);
+  box-shadow: 0 4px 16px rgba(0, 240, 255, 0.12);
+}
+
+.form-deadline-pill i {
+  color: var(--brand-orange);
+}
+
 /* ===================================================================
    Video Showcase Section (16:9 Cinema Theatre & Highlights)
    =================================================================== */

@@ -7,7 +7,7 @@
 // Official Google Apps Script Web App Endpoint for Real-Time Google Sheets Logging
 const GOOGLE_SHEETS_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxm07ynQrVWiOnpNYERN5Fw-I1g2trlE0xiRqwdp-SLOqrklmMY4GfPJ1_kh-fnxMYq/exec';
 
-document.addEventListener('DOMContentLoaded', () => {
+function initApp() {
   // Initialize all modules
   initThemeToggle();
   initCountdown();
@@ -17,7 +17,13 @@ document.addEventListener('DOMContentLoaded', () => {
   initMobileMenu();
   initApplicationForm();
   initAdminPortal();
-});
+}
+
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', initApp);
+} else {
+  initApp();
+}
 
 /* ===================================================================
    1. Theme Toggle (Dark / Light Mode)
@@ -59,19 +65,18 @@ function initCountdown() {
   const hoursEl = document.getElementById('hours');
   const minsEl = document.getElementById('minutes');
   const secsEl = document.getElementById('seconds');
+  const formDeadlineEl = document.getElementById('formDeadlineRemaining');
 
-  // Target deadline: 10th November 23:59:59
-  const currentYear = new Date().getFullYear();
-  let deadline = new Date(currentYear, 10, 10, 23, 59, 59); // Month is 0-indexed: 10 = November
-  // If November 10th of current year has already passed, target next year
-  if (deadline.getTime() < Date.now()) {
-    deadline = new Date(currentYear + 1, 10, 10, 23, 59, 59);
-  }
-  const targetDate = deadline.getTime();
-  localStorage.setItem('etechnovation_deadline', targetDate);
+  // Purge any legacy localStorage keys from prior drafts to prevent stale countdowns
+  try {
+    localStorage.removeItem('etechnovation_deadline');
+  } catch (e) {}
+
+  // Fixed Application Deadline: 10th November 2026, 23:59:59 BST (UTC+6)
+  const targetDate = new Date('2026-11-10T23:59:59+06:00').getTime();
 
   function update() {
-    const now = new Date().getTime();
+    const now = Date.now();
     const distance = targetDate - now;
 
     if (distance <= 0) {
@@ -79,6 +84,7 @@ function initCountdown() {
       if (hoursEl) hoursEl.textContent = '00';
       if (minsEl) minsEl.textContent = '00';
       if (secsEl) secsEl.textContent = '00';
+      if (formDeadlineEl) formDeadlineEl.textContent = 'Applications Closed';
       return;
     }
 
@@ -91,6 +97,10 @@ function initCountdown() {
     if (hoursEl) hoursEl.textContent = String(hours).padStart(2, '0');
     if (minsEl) minsEl.textContent = String(minutes).padStart(2, '0');
     if (secsEl) secsEl.textContent = String(seconds).padStart(2, '0');
+
+    if (formDeadlineEl) {
+      formDeadlineEl.textContent = `${days} Days, ${String(hours).padStart(2, '0')}h ${String(minutes).padStart(2, '0')}m Remaining`;
+    }
   }
 
   update();

@@ -25,7 +25,7 @@
   <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.2/dist/confetti.browser.min.js"></script>
 
   <!-- Main Stylesheet -->
-  <link rel="stylesheet" href="styles.css?v=5">
+  <link rel="stylesheet" href="styles.css?v=20261110">
   <link rel="icon" type="image/png" href="assets/poster.png">
 </head>
 <body>
@@ -134,25 +134,47 @@
             </div>
             <div class="countdown-grid" id="countdownGrid">
               <div class="countdown-box">
-                <span class="countdown-val" id="days">14</span>
+                <span class="countdown-val" id="days">20</span>
                 <span class="countdown-lbl">Days</span>
               </div>
               <div class="countdown-divider">:</div>
               <div class="countdown-box">
-                <span class="countdown-val" id="hours">08</span>
+                <span class="countdown-val" id="hours">01</span>
                 <span class="countdown-lbl">Hours</span>
               </div>
               <div class="countdown-divider">:</div>
               <div class="countdown-box">
-                <span class="countdown-val" id="minutes">45</span>
+                <span class="countdown-val" id="minutes">30</span>
                 <span class="countdown-lbl">Mins</span>
               </div>
               <div class="countdown-divider">:</div>
               <div class="countdown-box">
-                <span class="countdown-val" id="seconds">30</span>
+                <span class="countdown-val" id="seconds">00</span>
                 <span class="countdown-lbl">Secs</span>
               </div>
             </div>
+            <script>
+              (function() {
+                try {
+                  var target = new Date('2026-11-10T23:59:59+06:00').getTime();
+                  var diff = target - Date.now();
+                  if (diff > 0) {
+                    var d = Math.floor(diff / 86400000);
+                    var h = Math.floor((diff % 86400000) / 3600000);
+                    var m = Math.floor((diff % 3600000) / 60000);
+                    var s = Math.floor((diff % 60000) / 1000);
+                    var elD = document.getElementById('days');
+                    var elH = document.getElementById('hours');
+                    var elM = document.getElementById('minutes');
+                    var elS = document.getElementById('seconds');
+                    if (elD) elD.textContent = String(d).padStart(2, '0');
+                    if (elH) elH.textContent = String(h).padStart(2, '0');
+                    if (elM) elM.textContent = String(m).padStart(2, '0');
+                    if (elS) elS.textContent = String(s).padStart(2, '0');
+                  }
+                } catch(e) {}
+              })();
+            </script>
           </div>
 
           <!-- Hero Action Buttons -->
@@ -516,6 +538,10 @@
           <p class="section-desc">
             Complete the 4-step registration below before <strong>10th November</strong>. Your draft is auto-saved locally so you will never lose your progress!
           </p>
+          <div class="form-deadline-pill">
+            <i class="fa-solid fa-clock"></i>
+            <span>Deadline: <strong>10th November (11:59 PM BST)</strong> • <span id="formDeadlineRemaining">Calculating...</span></span>
+          </div>
         </div>
 
         <div class="application-card">
@@ -1205,6 +1231,6 @@
   <div id="toastContainer" class="toast-container"></div>
 
   <!-- Main JavaScript File -->
-  <script src="app.js?v=7"></script>
+  <script src="app.js?v=20261110"></script>
 </body>
 </html>
