@@ -54,8 +54,9 @@ Open `http://localhost:3000` in your web browser.
 ├── index.html          # Main recruitment landing page and wizard form
 ├── styles.css          # Design system, responsive layouts & micro-animations
 ├── app.js              # Application logic, validation, Google Sheets sync & admin portal
+├── final banner.jpeg   # Official Campus Ambassador recruitment banner
 ├── assets/
-│   ├── poster.png          # Official recruitment poster
+│   ├── final-banner.jpeg   # Official recruitment banner
 │   ├── promo-video.mp4     # Official carnival promo video (16:9)
 │   ├── video-poster.jpg    # Video cover thumbnail
 │   └── ...
